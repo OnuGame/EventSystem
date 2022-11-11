@@ -35,7 +35,7 @@ export class EventSystem {
      * @param eventString The stringified event
      */
     parse(eventString: string): void {
-        const parsed = JSON.parse(eventString) as BaseEvent;
+        const parsed = BaseEvent.parse(eventString);
         this.emit(parsed);
     }
 }
