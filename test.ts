@@ -1,4 +1,4 @@
-import { BaseEvent } from "./src/BaseEvent";
+import { BaseEvent, EventSystem } from "./src";
 // test the eventsystem
 
 class TestEvent extends BaseEvent {
@@ -7,13 +7,10 @@ class TestEvent extends BaseEvent {
     }
 }
 
-const e1 = new TestEvent();
-const e1sting = e1.stringify();
+const eventSystem = new EventSystem();
+eventSystem.registerEvent("TestEvent", (event: TestEvent) => {
+    console.log("TestEvent received");
+    console.log(event);
+});
 
-console.log(e1sting);
-
-const e2 = BaseEvent.parse(e1sting);
-
-console.log(e1, e2);
-
-console.log(e2.stringify());
+eventSystem.emit({ name: "TestEvent" } as BaseEvent);

@@ -26,6 +26,12 @@ export class EventSystem {
     emit(event: BaseEvent): void {
         let eventListeners = this.events.get(event.name) || [];
         let broadcastListeners = this.events.get("*") || [];
+        // check if event is a child of BaseEvent. if not create a new instance of BaseEvent and assign the properties
+        if (!(event instanceof BaseEvent)) {
+            const baseEvent = new BaseEvent("BaseEvent");
+            Object.assign(baseEvent, event);
+            event = baseEvent;
+        }
 
         [...eventListeners, ...broadcastListeners].forEach((listener) => listener(event));
     }
