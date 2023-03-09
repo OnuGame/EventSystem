@@ -4,8 +4,9 @@ import { BaseEvent } from "./BaseEvent";
  * A basic event system that supports type safe serialisation and deserialisation.
  */
 export class EventSystem {
-    events: Map<string, Function[]> = new Map();
+    static debug = false;
 
+    events: Map<string, Function[]> = new Map();
     constructor() {}
 
     /**
