@@ -21,6 +21,21 @@ export class EventSystem {
     }
 
     /**
+     * Unregisters one or all listeners for a specific event
+     * @param eventName The name of the event to unregister
+     * @param listener The listener to unregister. If not provided, all listeners for the event will be unregistered
+     */
+    unregisterEvent(eventName: string, listener?: (event: BaseEvent) => void): void {
+        let registered = this.events.get(eventName) || [];
+        if (listener) {
+            registered = registered.filter((l) => l !== listener);
+            this.events.set(eventName, registered);
+        } else {
+            this.events.delete(eventName);
+        }
+    }
+
+    /**
      * Emits an event to all listeners
      * @param event The event to emit
      */
