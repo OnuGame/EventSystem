@@ -36,3 +36,10 @@ testMap.set("def", 456);
 const strigifiedEvent = new MapTestEvent(testMap).stringify();
 
 eventSystem.parse(strigifiedEvent);
+
+// Test unregistered event
+
+eventSystem.unregisterEvent("TestEvent");
+console.log("TestEvent unregistered");
+
+eventSystem.emit(new TestEvent()); // should not be received
